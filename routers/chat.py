@@ -9,9 +9,9 @@ router = APIRouter()
 
 @router.post("/learn", response_model=ChatResponse)
 async def chat_user(
-    user: User = Depends(get_user_data), 
+    user: User = Depends(get_user_data),
     kakaoTalkFile: UploadFile = File(...)
 ):
-    chat_service.learn(user, kakaoTalkFile)
+    await chat_service.learn(user, kakaoTalkFile)
     user_uuid = str(uuid.uuid4())
     return ChatResponse(user_key=user_uuid)
